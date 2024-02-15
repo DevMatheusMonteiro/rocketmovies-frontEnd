@@ -20,6 +20,16 @@ export const Container = styled.header`
     > label {
       width: 50%;
     }
+
+    h1 {
+      font-size: 2.4rem;
+      color: var(--pink);
+    }
+
+    > a:focus {
+      border-radius: 0.8rem;
+      outline: 2px solid var(--white);
+    }
   }
 
   .profile {
@@ -59,16 +69,12 @@ export const Container = styled.header`
     }
 
     img {
+      aspect-ratio: 1/1;
       width: 100%;
       height: 100%;
       border: 2px solid var(--gray-100);
       border-radius: 50%;
       object-fit: cover;
     }
-  }
-
-  h1 {
-    font-size: 2.4rem;
-    color: var(--pink);
   }
 `;

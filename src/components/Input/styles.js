@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Label = styled.label`
   width: 100%;
-  color: var(--gray-200);
-  background-color: var(--black-100);
+  color: ${({ $error }) => ($error ? "var(--white)" : "var(--gray-200)")};
+  background-color: ${({ $error }) => ($error ? "red" : "var(--black-100)")};
   display: flex;
   align-items: center;
   height: 5.6rem;
@@ -15,11 +15,11 @@ export const Label = styled.label`
     width: 100%;
     height: 100%;
     border: 0;
-    background-color: var(--black-100);
+    background-color: transparent;
     color: var(--white);
 
     &::placeholder {
-      color: var(--gray-200);
+      color: ${({ $error }) => ($error ? "white" : "var(--gray-200)")};
     }
   }
 `;

@@ -1,7 +1,7 @@
 import { Label } from "./styles";
 import { useRef } from "react";
 
-export function Input({ icon: Icon, id, description, ...rest }) {
+export function Input({ icon: Icon, id, description, error = false, ...rest }) {
   const labelRef = useRef();
 
   function outlineOnLabel() {
@@ -13,7 +13,7 @@ export function Input({ icon: Icon, id, description, ...rest }) {
   }
 
   return (
-    <Label ref={labelRef} htmlFor={id}>
+    <Label $error={error} ref={labelRef} htmlFor={id}>
       <span className="sr-only">{description}</span>
       {Icon && <Icon size={20} />}
 

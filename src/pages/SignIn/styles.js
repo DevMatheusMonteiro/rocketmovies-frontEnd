@@ -4,7 +4,7 @@ import background from "../../assets/cinema_background.png";
 export const Container = styled.main`
   display: flex;
   align-items: stretch;
-  height: 100vh;
+  min-height: 100vh;
 
   > div:first-child {
     padding: 16rem 6.4rem 6.4rem;

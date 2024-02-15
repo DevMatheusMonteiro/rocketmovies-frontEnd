@@ -3,17 +3,17 @@ import { Container } from "./styles";
 import { Stars } from "../Stars";
 import { Tag } from "../Tag";
 
-export function Note({ title, description, rate, tags }) {
+export function Note({ data }) {
   return (
-    <Container to="/details/1">
+    <Container to={`/details/${data.id}`}>
       <div className="title-rant">
-        <h3>{title}</h3>
-        <Stars rate={rate} />
+        <h3>{data.title}</h3>
+        <Stars rate={data.rating} />
       </div>
-      <p>{description}</p>
+      <p>{data.description}</p>
       <div className="container-tags">
-        {tags &&
-          tags.map((tag) => {
+        {data.movieTags &&
+          data.movieTags.map((tag) => {
             return <Tag key={tag.id} title={tag.name} />;
           })}
       </div>

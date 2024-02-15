@@ -2,19 +2,20 @@ import { Container } from "./styles";
 
 import { FiPlus, FiX } from "react-icons/fi";
 
-export function NoteItem({ isnew = false, onclick, value, ...rest }) {
+import { useRef } from "react";
+
+export function NoteItem({ isnew = false, ismutable, onclick, ...rest }) {
   return (
-    <Container $isnew={isnew}>
+    <Container $isnew={isnew} $ismutable={ismutable}>
       <input
         placeholder="Novo marcador"
         type="text"
         tabIndex={!isnew ? -1 : 0}
-        value={value}
         readOnly={!isnew}
         {...rest}
       />
       <button type="button" onClick={onclick}>
-        {isnew ? <FiPlus /> : <FiX />}
+        {!isnew ? <FiX /> : <FiPlus />}
       </button>
     </Container>
   );

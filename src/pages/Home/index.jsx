@@ -1,18 +1,41 @@
+import { useEffect, useState } from "react";
+
 import { Container } from "./styles";
 
 import { FiPlus } from "react-icons/fi";
 
 import { Header } from "../../components/Header";
-import { Button } from "../../components/Button";
 import { Content } from "../../components/Content";
 import { Note } from "../../components/Note";
 
 import { Link } from "react-router-dom";
+import api from "../../services/api";
 
 export default function Home() {
+  const [search, setSearch] = useState("");
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    async function fetchNotes() {
+      try {
+        const response = await api.get(`/movie-notes?title=${search}`);
+
+        setNotes(response.data);
+      } catch (error) {
+        if (error.response) {
+          alert(error.response.data.message);
+        } else {
+          alert("Não foi possível listar as notas");
+        }
+      }
+    }
+
+    fetchNotes();
+  }, [search]);
+
   return (
     <Container>
-      <Header />
+      <Header onChange={(e) => setSearch(e.target.value)} />
 
       <main>
         <div>
@@ -24,36 +47,8 @@ export default function Home() {
             </Link>
           </header>
           <Content>
-            <Note
-              title="Interestelar"
-              rate={4}
-              description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia alias asperiores culpa! Deleniti deserunt aliquid velit at iusto quae saepe laborum, explicabo sed delectus a harum non recusandae quisquam aperiam!"
-              tags={[
-                { id: 1, name: "Ficção científica" },
-                { id: 2, name: "Drama" },
-                { id: 3, name: "Família" },
-              ]}
-            />
-            <Note
-              title="Interestelar"
-              rate={1}
-              description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia alias asperiores culpa! Deleniti deserunt aliquid velit at iusto quae saepe laborum, explicabo sed delectus a harum non recusandae quisquam aperiam!"
-              tags={[
-                { id: 1, name: "Ficção científica" },
-                { id: 2, name: "Drama" },
-                { id: 3, name: "Família" },
-              ]}
-            />
-            <Note
-              title="Interestelar"
-              rate={1}
-              description="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia alias asperiores culpa! Deleniti deserunt aliquid velit at iusto quae saepe laborum, explicabo sed delectus a harum non recusandae quisquam aperiam!"
-              tags={[
-                { id: 1, name: "Ficção científica" },
-                { id: 2, name: "Drama" },
-                { id: 3, name: "Família" },
-              ]}
-            />
+            {notes &&
+              notes.map((note) => <Note data={note} key={String(note.id)} />)}
           </Content>
         </div>
       </main>

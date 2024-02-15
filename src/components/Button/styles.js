@@ -9,6 +9,6 @@ export const Container = styled.button`
   color: var(--black-300);
 
   &:focus {
-    outline: 2px solid var(--white);
+    outline: 1px solid var(--white);
   }
 `;
